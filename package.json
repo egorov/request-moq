@@ -1,5 +1,5 @@
 {
-  "name": "request-mock",
+  "name": "request-moq",
   "version": "1.0.0",
   "description": "Mock object for use instead http request in unit tests.",
   "main": "index.js",
@@ -10,18 +10,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/egorov/request-mock.git"
+    "url": "git+https://github.com/egorov/request-moq.git"
   },
   "keywords": [
     "request",
     "mock"
   ],
-  "author": "Sergey Egorov <se@agilestyle.ru> (https://twitter.com/catinhands)",
+  "author": "Sergey Egorov <s.e.888@live.ru>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/egorov/request-mock/issues"
+    "url": "https://github.com/egorov/request-moq/issues"
   },
-  "homepage": "https://github.com/egorov/request-mock#readme",
+  "homepage": "https://github.com/egorov/request-moq#readme",
   "dependencies": {
     "fixed-size-queue": "*"
   },

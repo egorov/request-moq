@@ -13,12 +13,12 @@ var expectRequest = {
     headers: undefined
 };
 
-var requestMock = function(options, callback){
+var requestMoq = function(options, callback){
     "use strict";
 
     validateOptions(options);
 
-    var expected = requestMock.expectations.dequeue();
+    var expected = requestMoq.expectations.dequeue();
     var expReq = copy(expected.request);
     var expResp = copy(expected.response);
 
@@ -32,7 +32,7 @@ var requestMock = function(options, callback){
 
 };
 
-requestMock.expectations = require('fixed-size-queue').create();
+requestMoq.expectations = require('fixed-size-queue').create();
 
 function validateOptions(options){
     if(typeof options === 'undefined')
@@ -45,7 +45,7 @@ function validateOptions(options){
         options.method = 'GET';
 }
 
-requestMock.respond = function(options){
+requestMoq.respond = function(options){
     "use strict";
 
     var expectedResponse = {};
@@ -54,7 +54,7 @@ requestMock.respond = function(options){
             expectedResponse[property] = options[property];
     }
 
-    var expectedRequest = requestMock.expectations.last();
+    var expectedRequest = requestMoq.expectations.last();
     expectedRequest.response = expectedResponse;
 
 };
@@ -82,7 +82,7 @@ var copy = function(obj){
 
 };
 
-requestMock.clearExpectations = function(){
+requestMoq.clearExpectations = function(){
     'use strict';
 
     while(this.expectations.getCount() > 0){
@@ -91,7 +91,7 @@ requestMock.clearExpectations = function(){
 
 };
 
-requestMock.expect = function(options){
+requestMoq.expect = function(options){
     "use strict";
 
     validateOptions(options);
@@ -102,10 +102,10 @@ requestMock.expect = function(options){
             expectedRequest[property] = options[property];
     }
 
-    requestMock.expectations.enqueue( { request: expectedRequest });
+    requestMoq.expectations.enqueue( { request: expectedRequest });
 
     return this;
 
 };
 
-module.exports = requestMock;
+module.exports = requestMoq;

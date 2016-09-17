@@ -1,3 +1,3 @@
-var request_mock = require('./src/RequestMock');
+var request_moq = require('./src/RequestMoq');
 
-module.exports = request_mock;
+module.exports = request_moq;

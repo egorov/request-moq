@@ -1,7 +1,7 @@
-describe('request-mock', function(){
+describe('request-moq', function(){
     "use strict";
 
-    var requestMock = require('../index');
+    var requestMoq = require('../index');
     var method, url, body, headers;
 
     beforeEach(function(){
@@ -15,17 +15,17 @@ describe('request-mock', function(){
     });
 
     beforeEach(function(){
-        expect(requestMock.expectations.getCount()).toEqual(0);
+        expect(requestMoq.expectations.getCount()).toEqual(0);
     });
 
     afterEach(function(){
-        requestMock.clearExpectations();
+        requestMoq.clearExpectations();
     });
 
     it('should throw on expect without options', function(){
 
         var assert = function(){
-            requestMock.expect();
+            requestMoq.expect();
         };
 
         expect(assert).toThrow(new Error('undefined is not a valid url or options object.'));
@@ -35,7 +35,7 @@ describe('request-mock', function(){
     it('should throw on expect without url', function(){
 
         var assert = function(){
-            requestMock.expect({ method: method });
+            requestMoq.expect({ method: method });
         };
 
         expect(assert).toThrow(new Error('undefined is not a valid url or options object.'));
@@ -44,8 +44,8 @@ describe('request-mock', function(){
 
     it('should by default set method to GET', function(){
 
-        requestMock.expect({ url: url });
-        var expected = requestMock.expectations.dequeue();
+        requestMoq.expect({ url: url });
+        var expected = requestMoq.expectations.dequeue();
 
         expect(expected.request.method).toEqual('GET');
         expect(expected.request.url).toEqual(url);
@@ -55,8 +55,8 @@ describe('request-mock', function(){
 
     it('should not set unknown data option', function(){
 
-        requestMock.expect({ method: method, url: url, data: body });
-        var expected = requestMock.expectations.dequeue();
+        requestMoq.expect({ method: method, url: url, data: body });
+        var expected = requestMoq.expectations.dequeue();
 
         expect(expected.request.method).toEqual(method);
         expect(expected.request.url).toEqual(url);
@@ -66,8 +66,8 @@ describe('request-mock', function(){
 
     it('should set request method, url and body', function(){
 
-        requestMock.expect({ method: method, url: url, body: body });
-        var expected = requestMock.expectations.dequeue();
+        requestMoq.expect({ method: method, url: url, body: body });
+        var expected = requestMoq.expectations.dequeue();
 
         expect(expected.request.method).toEqual(method);
         expect(expected.request.url).toEqual(url);
@@ -77,8 +77,8 @@ describe('request-mock', function(){
 
     it('should set request method, url, body and headers', function(){
 
-        requestMock.expect({ method: method, url: url, body: body, headers: headers });
-        var expected = requestMock.expectations.dequeue();
+        requestMoq.expect({ method: method, url: url, body: body, headers: headers });
+        var expected = requestMoq.expectations.dequeue();
 
         expect(expected.request.method).toEqual(method);
         expect(expected.request.url).toEqual(url);
@@ -89,8 +89,8 @@ describe('request-mock', function(){
 
     it('should set response body', function(){
 
-        requestMock.expect({ method: method, url: url }).respond({ body: body });
-        var expected = requestMock.expectations.dequeue();
+        requestMoq.expect({ method: method, url: url }).respond({ body: body });
+        var expected = requestMoq.expectations.dequeue();
 
         expect(expected.request.method).toEqual(method);
         expect(expected.request.url).toEqual(url);
@@ -99,8 +99,8 @@ describe('request-mock', function(){
 
     it('should set response statusCode and body', function(){
 
-        requestMock.expect({ method: method, url: url }).respond({ statusCode: 201, body: body });
-        var expected = requestMock.expectations.dequeue();
+        requestMoq.expect({ method: method, url: url }).respond({ statusCode: 201, body: body });
+        var expected = requestMoq.expectations.dequeue();
 
         expect(expected.request.method).toEqual(method);
         expect(expected.request.url).toEqual(url);
@@ -111,8 +111,8 @@ describe('request-mock', function(){
 
     it('should set response statusCode, body and headers', function(){
 
-        requestMock.expect({ method: method, url: url }).respond({ statusCode: 201, body: body, headers: headers });
-        var expected = requestMock.expectations.dequeue();
+        requestMoq.expect({ method: method, url: url }).respond({ statusCode: 201, body: body, headers: headers });
+        var expected = requestMoq.expectations.dequeue();
 
         expect(expected.request.method).toEqual(method);
         expect(expected.request.url).toEqual(url);
@@ -123,10 +123,10 @@ describe('request-mock', function(){
 
     it('should throw on request without url', function(){
 
-        requestMock.expect({ method: method, url: url });
+        requestMoq.expect({ method: method, url: url });
 
         var assert = function(){
-            requestMock({ method: method });
+            requestMoq({ method: method });
         };
 
         expect(assert).toThrow(new Error('undefined is not a valid url or options object.'));
@@ -135,17 +135,17 @@ describe('request-mock', function(){
 
     it('should send request with GET method by default', function(){
 
-        requestMock.expect({ url: url });
-        requestMock({ url: url });
+        requestMoq.expect({ url: url });
+        requestMoq({ url: url });
 
     });
 
     it('should throw when methods not match', function(){
 
-        requestMock.expect({ method: 'OPTIONS', url: url });
+        requestMoq.expect({ method: 'OPTIONS', url: url });
 
         var assert = function(){
-            requestMock( { method: 'GET', url: url });
+            requestMoq( { method: 'GET', url: url });
         };
 
         expect(assert).toThrow(new Error('Unexpected request method "GET" instead of "OPTIONS"!'));
@@ -153,10 +153,10 @@ describe('request-mock', function(){
 
     it('should throw when urls not match', function(){
 
-        requestMock.expect({ method: method, url: url });
+        requestMoq.expect({ method: method, url: url });
 
         var assert = function(){
-            requestMock( { method: method, url: 'http://localhost:3333' });
+            requestMoq( { method: method, url: 'http://localhost:3333' });
         };
 
         expect(assert).toThrow(new Error('Unexpected request url "http://localhost:3333" instead of "http://localhost:8888"!'));
@@ -164,9 +164,9 @@ describe('request-mock', function(){
 
     it('should not throw if body is not expected', function(){
 
-        requestMock.expect({ method: method, url: url });
+        requestMoq.expect({ method: method, url: url });
 
-        requestMock( { method: method,
+        requestMoq( { method: method,
             url: url,
             body: body
         });
@@ -174,9 +174,9 @@ describe('request-mock', function(){
 
     it('should not throw if headers is not expected', function(){
 
-        requestMock.expect({ method: method, url: url });
+        requestMoq.expect({ method: method, url: url });
 
-        requestMock( { method: method,
+        requestMoq( { method: method,
             url: url,
             headers: headers
         });
@@ -184,9 +184,9 @@ describe('request-mock', function(){
 
     it('should not throw if body and headers is not expected', function(){
 
-        requestMock.expect({ method: method, url: url });
+        requestMoq.expect({ method: method, url: url });
 
-        requestMock( { method: method,
+        requestMoq( { method: method,
             url: url,
             body: body,
             headers: headers
@@ -195,13 +195,13 @@ describe('request-mock', function(){
 
     it('should throw if body is not match', function(){
 
-        requestMock.expect({ method: method,
+        requestMoq.expect({ method: method,
             url: url,
             body: body
         });
 
         var assert = function(){
-            requestMock( { method: method,
+            requestMoq( { method: method,
                 url: url,
                 body: { firstName: 'Jack' }
             });
@@ -212,14 +212,14 @@ describe('request-mock', function(){
 
     it('should throw if headers is not match', function(){
 
-        requestMock.expect({ method: method,
+        requestMoq.expect({ method: method,
             url: url,
             body: body,
             headers: headers
         });
 
         var assert = function(){
-            requestMock( { method: method,
+            requestMoq( { method: method,
                 url: url,
                 body: body,
                 headers: [{ 'Content-Type': 'text' }]
@@ -231,17 +231,17 @@ describe('request-mock', function(){
 
     it('should not throw method and url match', function(){
 
-        requestMock.expect({ method: method, url: url });
+        requestMoq.expect({ method: method, url: url });
 
-        requestMock({ method: method, url: url });
+        requestMoq({ method: method, url: url });
 
     });
 
     it('should not throw method, url and body match', function(){
 
-        requestMock.expect({ method: method, url: url, body: body });
+        requestMoq.expect({ method: method, url: url, body: body });
 
-        requestMock({ method: 'GET', url: 'http://localhost:8888',
+        requestMoq({ method: 'GET', url: 'http://localhost:8888',
             body: {
                 name: 'value'
             }
@@ -250,13 +250,13 @@ describe('request-mock', function(){
 
     it('should not throw when options match', function(){
 
-        requestMock.expect({ method: method,
+        requestMoq.expect({ method: method,
             url: url,
             body: body,
             headers: headers
         });
 
-        requestMock({ method: method,
+        requestMoq({ method: method,
             url: url,
             body: body,
             headers: headers
@@ -265,10 +265,10 @@ describe('request-mock', function(){
 
     it('should respond with statusCode', function(){
 
-        requestMock.expect({ url: url, method: method })
+        requestMoq.expect({ url: url, method: method })
             .respond({ statusCode: 200 });
 
-        requestMock({ url: url, method: method },
+        requestMoq({ url: url, method: method },
             function(error, response, body){
                 expect(error).toBeUndefined();
                 expect(response.statusCode).toEqual(200);
@@ -278,10 +278,10 @@ describe('request-mock', function(){
 
     it('should respond with statusCode and body', function(){
 
-        requestMock.expect({ url: url, method: method })
+        requestMoq.expect({ url: url, method: method })
             .respond({ statusCode: 200, body: body });
 
-        requestMock({ url: url, method: method },
+        requestMoq({ url: url, method: method },
             function(error, response, body){
                 expect(error).toBeUndefined();
                 expect(response.statusCode).toEqual(200);
@@ -292,10 +292,10 @@ describe('request-mock', function(){
 
     it('should respond with all options', function(){
 
-        requestMock.expect({ url: url, method: method })
+        requestMoq.expect({ url: url, method: method })
             .respond({ statusCode: 200, body: body, headers: headers });
 
-        requestMock({ url: url, method: method },
+        requestMoq({ url: url, method: method },
             function(error, response, body){
                 expect(error).toBeUndefined();
                 expect(response.statusCode).toEqual(200);
@@ -314,13 +314,13 @@ describe('request-mock', function(){
         var postResponseBody = { error: 'Validation error!' };
         var postHeaders = { 'Cookie': '0923809rjlskdjflk' };
 
-        requestMock.expect({ url: url, method: method })
+        requestMoq.expect({ url: url, method: method })
             .respond({ statusCode: 200, body: body, headers: headers });
 
-        requestMock.expect({ url: postUrl, method: postMethod })
+        requestMoq.expect({ url: postUrl, method: postMethod })
             .respond({ statusCode: postStatusCode, body: postResponseBody, headers: postHeaders });
 
-        requestMock({ url: url, method: method },
+        requestMoq({ url: url, method: method },
             function(error, response, body){
                 expect(error).toBeUndefined();
                 expect(response.statusCode).toEqual(200);
@@ -329,7 +329,7 @@ describe('request-mock', function(){
                 expect(body).toEqual(body);
             });
 
-        requestMock({ url: postUrl, method: postMethod },
+        requestMoq({ url: postUrl, method: postMethod },
             function(error, response, body){
                 expect(error).toBeUndefined();
                 expect(response.statusCode).toEqual(postStatusCode);

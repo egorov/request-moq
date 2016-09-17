@@ -1,14 +1,14 @@
-# request-mock ![Build status](https://travis-ci.org/egorov/request-mock.svg?branch=master)
+# request-moq ![Build status](https://travis-ci.org/egorov/request-moq.svg?branch=master)
 
-Mock object for use instead http request in unit tests.
+Mock object for use instead http [request](https://github.com/request/request) in unit tests.
 
 You can add it to your project with npm:
 
-    npm install --save-dev request-mock
+    npm install --save-dev request-moq
 
 Quickstart guide:
 
-    var mRequest = require('request-mock');
+    var mRequest = require('request-moq');
     
     var options = {
         method: 'GET',
@@ -26,4 +26,4 @@ Quickstart guide:
             
         });
         
-Other usage examples you can find at spec/RequestMockSpec.js.
+Other usage examples you can find at spec/RequestMoqSpec.js.
