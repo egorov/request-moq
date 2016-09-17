@@ -1,4 +1,4 @@
-# request-mock ![Build status](https://travis-ci.org/egorov/request-mock.svg?branch=master)
+# request-mock
 
 Mock object for use instead http request in unit tests.
 
