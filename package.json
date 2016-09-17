@@ -1,0 +1,32 @@
+{
+  "name": "request-mock",
+  "version": "1.0.0",
+  "description": "Mock object for use instead http request in unit tests.",
+  "main": "index.js",
+  "scripts": {
+    "pretest": "npm install && npm run lint",
+    "test": "jasmine",
+    "lint": "jshint index.js src spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/egorov/request-mock.git"
+  },
+  "keywords": [
+    "request",
+    "mock"
+  ],
+  "author": "Sergey Egorov <se@agilestyle.ru> (https://twitter.com/catinhands)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/egorov/request-mock/issues"
+  },
+  "homepage": "https://github.com/egorov/request-mock#readme",
+  "dependencies": {
+    "fixed-size-queue": "*"
+  },
+  "devDependencies": {
+    "jasmine": "*",
+    "jshint": "*"
+  }
+}
