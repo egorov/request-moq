@@ -13,7 +13,7 @@ Quickstart guide:
     var options = {
         method: 'GET',
         url: 'http://localhost',
-        headers: 'Accept: applicaton-json'
+        headers: [ { Accept: 'application-json'} ]
         };
         
     mRequest.expect(options).respond({statusCode: 201});
